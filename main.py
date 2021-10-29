@@ -61,9 +61,6 @@ plt.subplot(3,3,5)
 plt.imshow(Imagen3)
 plt.xlabel('Kernel =')
 
-#plt.subplot(2,2,4)
-#plt.imshow(J2)
-#plt.xlabel('Vertical direction')
 
 plt.grid(False)
 plt.show()
