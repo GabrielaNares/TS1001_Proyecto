@@ -18,7 +18,7 @@ def gauss(sigma,k):
             g[x][y]=1/(2*numpy.pi*sigma**2)*numpy.exp(-(x**2+y**2)/(2*sigma**2))
     return g
 
-   def Laplacian(sigma, k):
+def Laplacian(sigma, k):
     matix=[[0] * k for i in range(k)]
     for i in range(k):
         for j in range(k):
