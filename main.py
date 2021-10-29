@@ -1,43 +1,26 @@
-import matplotlib.pyplot as plt
-import numpy
-from PIL import Image
-from scipy import ndimage
 import librerias_kernel as lbk
 
-#Funcion para agregar padding
 def pad_with(vector, pad_width, iaxis, kwargs):
     pad_value = kwargs.get('padder', 10)
     vector[:pad_width[0]] = pad_value
     vector[-pad_width[1]:] = pad_value
     
-#Formato de Imagen
-Is = Image.open('Sample.png'); #Imagen del perro
-I = Is.convert('L'); #Convierte imagen a escala de grises
-I = numpy.asarray(I); #Conversion numerica para operar de 0-1
-I = I / 255.0; #Normalizacion 0-1
-
-#Se agrega padding
+Is = Image.open('Sample.png');
+I = Is.convert('L');
+I = numpy.asarray(I);
+I = I / 255.0;
 I = numpy.pad(I, 10, pad_with, padder=0)
+        
+km=lbk.kernel_sombrero(3,15)
 
-#Kernel Sombrero
-ks=lbk.kernel_sombrero(3,15)
+#Sombrero de Kernel
+Imagen = ndimage.convolve(I, km, mode='constant', cval=0.0)
 
-#Kernel Gauss
-kg=lbk.gauss(10,15)
-
-#Kernel Laplacian
-klp = lbk.Laplacian(5,15)
-
-#Se aplica Kernel Sombrero a Imagen
-Imagen = ndimage.convolve(I, ks, mode='constant', cval=0.0)
-
-#Se aplica Kernel Gauss a Imagen
+#Kernels Gauss
 Imagen1 = ndimage.convolve(I, kg, mode='constant', cval=0.0)
 
-#Se aplica Laplacian a Imagen
-Imagen2 = ndimage.convolve(I, klp, mode='constant', cval=0.0)
 
-#Se ajusta tamaño de Figura
+
 plt.figure(figsize = (15,15))
 
 #Imagen original 
@@ -45,26 +28,41 @@ plt.subplot(3,3,1)
 plt.imshow(Is)
 plt.xlabel('Input Image')
 
-#Imagen con kernel Sombrero
+#Imagenes de Sombrero
 plt.subplot(3,3,2)
 plt.imshow(Imagen)
-plt.xlabel('Kernel Sombrero sigma=3')
+plt.xlabel('Sombrero sigma=3')
 
-#Imagen con kernel Gauss
 plt.subplot(3,3,3)
 plt.imshow(Imagen1)
-plt.xlabel('Kernel Gauss sigma = 10')
+plt.xlabel('Gauss sigma = ')
 
-#Imagen con kernel Laplacian
 plt.subplot(3,3,4)
-plt.imshow(Imagen2)
-plt.xlabel('Kernel Laplacian sigma= 5')
+plt.imshow(J3)
+plt.xlabel('Mexican Hat sigma=7')
 
-#Imagenes con kernel
+#Imagenes de Gauss
 plt.subplot(3,3,5)
-plt.imshow(Imagen3)
-plt.xlabel('Kernel =')
+plt.imshow(J4)
+plt.xlabel('Gauss sigma=3')
 
+plt.subplot(3,3,6)
+plt.imshow(J5)
+plt.xlabel('Gauss sigma=5')
+
+plt.subplot(3,3,7)
+plt.imshow(J6)
+plt.xlabel('Gauss sigma=7')
+
+#Imagen Sepia
+plt.subplot(3,3,8)
+plt.imshow(ks)
+plt.xlabel('Kernel Sepia')
+
+
+#plt.subplot(2,2,4)
+#plt.imshow(J2)
+#plt.xlabel('Vertical direction')
 
 plt.grid(False)
 plt.show()
