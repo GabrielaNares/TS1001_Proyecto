@@ -1,7 +1,4 @@
-import matplotlib.pyplot as plt
 import numpy
-from PIL import Image
-from scipy import ndimage
  
 def kernel_sombrero(sigma,k):
     matrix=numpy.zeros((k,k));
