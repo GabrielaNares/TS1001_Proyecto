@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+from PIL import Image
+from scipy import ndimage
 import librerias_kernel as lbk
 
 #Funcion para agregar padding
