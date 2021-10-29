@@ -22,5 +22,5 @@ def Laplacian(sigma, k):
     matix=[[0] * k for i in range(k)]
     for i in range(k):
         for j in range(k):
-            matrix[i][j]=((x**2+y**2-2*sigma**2)/sigma**4)*math.exp(-1*(x**2+y**2)/2*sigma**2)(i-(k-1)/2,j-(k-1)/2,sigma)
+            matrix[i][j]=((i**2+j**2-2*sigma**2)/sigma**4)*math.exp(-1*(i**2+j**2)/2*sigma**2)(i-(k-1)/2,j-(k-1)/2,sigma)
     return matrix
